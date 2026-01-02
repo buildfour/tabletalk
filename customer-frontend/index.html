@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TableTalk AI - Voice Ordering</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="entry-page">
+    <!-- Mode Switcher -->
+    <div class="mode-switcher">
+        <a href="index.html" class="mode-btn active">Customer</a>
+        <a href="/restaurant/" class="mode-btn">Restaurant Staff</a>
+    </div>
+
+    <div class="entry-container">
+        <header class="entry-header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 60 60" class="logo-svg">
+                        <circle cx="30" cy="30" r="28" fill="#f5a623"/>
+                        <circle cx="30" cy="30" r="21" fill="#FDF6E3"/>
+                        <!-- Burger icon -->
+                        <ellipse cx="30" cy="21" rx="15" ry="6" fill="#D4A574"/>
+                        <rect x="15" y="24" width="30" height="4" fill="#8B4513"/>
+                        <rect x="15" y="28" width="30" height="3" fill="#228B22"/>
+                        <rect x="15" y="31" width="30" height="4" fill="#FF6347"/>
+                        <ellipse cx="30" cy="39" rx="15" ry="6" fill="#D4A574"/>
+                    </svg>
+                </div>
+                <h1 class="logo-text">TABLETALK AI</h1>
+                <div class="logo-sparkles"><span class="sparkle">+</span></div>
+            </div>
+        </header>
+
+        <main class="entry-card">
+            <div class="entry-illustration">
+                <div class="table-scene">
+                    <div class="ai-assistant-icon">
+                        <div class="robot-head">
+                            <div class="robot-antenna"></div>
+                            <div class="robot-face">
+                                <div class="robot-eyes">
+                                    <div class="robot-eye"></div>
+                                    <div class="robot-eye"></div>
+                                </div>
+                                <div class="robot-mouth"></div>
+                            </div>
+                        </div>
+                        <div class="voice-waves">
+                            <span class="wave wave-1"></span>
+                            <span class="wave wave-2"></span>
+                            <span class="wave wave-3"></span>
+                        </div>
+                    </div>
+                    <div class="phone-on-table"><div class="phone-screen"></div></div>
+                    <div class="table-surface"></div>
+                </div>
+            </div>
+
+            <div class="entry-content">
+                <h2 class="entry-title">Welcome to Your Table</h2>
+                <p class="entry-subtitle">Enter your restaurant access code to continue</p>
+
+                <form class="access-form" id="accessForm">
+                    <div class="form-group">
+                        <label for="accessCode">Restaurant Access Code</label>
+                        <input type="text" id="accessCode" placeholder="Enter code" autocomplete="off" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Enter Menu</button>
+                </form>
+
+                <p class="helper-text">
+                    <svg class="info-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                    This service works only inside the restaurant
+                </p>
+            </div>
+        </main>
+
+        <footer class="entry-footer">
+            <p>Powered by <strong>AI Ordering</strong></p>
+        </footer>
+    </div>
+
+    <div class="checkered-floor"></div>
+    <script src="app.js"></script>
+</body>
+</html>

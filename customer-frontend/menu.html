@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TableTalk AI - Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="menu-page">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo-small">
+                <svg viewBox="0 0 40 40" class="logo-svg-small">
+                    <circle cx="20" cy="20" r="18" fill="#f5a623"/>
+                    <circle cx="20" cy="20" r="14" fill="#FDF6E3"/>
+                    <ellipse cx="20" cy="14" rx="10" ry="4" fill="#D4A574"/>
+                    <rect x="10" y="16" width="20" height="3" fill="#8B4513"/>
+                    <rect x="10" y="19" width="20" height="2" fill="#228B22"/>
+                    <rect x="10" y="21" width="20" height="3" fill="#FF6347"/>
+                    <ellipse cx="20" cy="26" rx="10" ry="4" fill="#D4A574"/>
+                </svg>
+            </div>
+            <h1 class="header-logo-text">TABLETALK AI</h1>
+            <span class="header-sparkle">+</span>
+        </div>
+        <div class="header-right">
+            <a href="/restaurant/" class="mode-switch-btn">Staff</a>
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSideNav()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Side Navigation Panel -->
+    <div class="side-nav-overlay" id="sideNavOverlay" onclick="toggleSideNav()"></div>
+    <nav class="side-nav" id="sideNav">
+        <div class="side-nav-header">
+            <div class="side-nav-user">
+                <div class="side-nav-avatar" id="sideNavAvatar">G</div>
+                <div class="side-nav-user-info">
+                    <span class="side-nav-name" id="sideNavName">Guest</span>
+                    <span class="side-nav-table" id="sideNavTable">Table -</span>
+                </div>
+            </div>
+            <button class="side-nav-close" onclick="toggleSideNav()">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </button>
+        </div>
+        <div class="side-nav-items">
+            <a href="menu.html" class="side-nav-item active"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z"/></svg>Menu</a>
+            <a href="#" class="side-nav-item" onclick="event.preventDefault(); goToCheckout()"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>View Order</a>
+            <a href="#" class="side-nav-item disabled"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>Order History<span class="coming-soon">Soon</span></a>
+        </div>
+        <div class="side-nav-footer">
+            <a href="#" class="side-nav-item logout" onclick="event.preventDefault(); signOut()"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/></svg>Sign Out</a>
+        </div>
+    </nav>
+
+    <!-- Main Layout Container -->
+    <div class="app-container">
+        <!-- Left Column: Welcome + Menu -->
+        <div class="left-column">
+            <!-- Welcome Banner -->
+            <section class="welcome-banner">
+                <div class="welcome-left">
+                    <div class="avatar-container">
+                        <div class="avatar">
+                            <div class="avatar-body"></div>
+                            <div class="avatar-head"></div>
+                            <div class="avatar-hair"></div>
+                            <div class="avatar-face">
+                                <div class="avatar-eyes"><span class="avatar-eye"></span><span class="avatar-eye"></span></div>
+                                <div class="avatar-smile"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="welcome-text">
+                        <div class="sparkle-icon">+</div>
+                        <h2>Welcome, <span id="welcomeName">Guest</span>!</h2>
+                        <p><span class="sparkle-icon">+</span> Hungry? What can we get for you today?</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Menu Section (scrollable) -->
+            <section class="menu-section">
+                <div class="menu-scroll">
+                    <!-- Burgers -->
+                    <div class="menu-category">
+                        <h3 class="category-title"><span class="category-icon burger-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 10H2c0-5.523 4.477-10 10-10s10 4.477 10 10zM2 14h20v2c0 2.21-1.79 4-4 4H6c-2.21 0-4-1.79-4-4v-2zm18 0H4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2zM2 12h20v.5H2V12z"/></svg></span>BURGERS</h3>
+                        <div class="menu-items">
+                            <div class="menu-item"><div class="item-info"><h4>HOT BURGER</h4><p>Grilled burger with chicken, lettuce, tomato and special sauce</p></div><div class="item-price">$10.50</div><button class="add-btn" onclick="addToCart(1, 'Hot Burger', 10.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>CRUNCH BURGER</h4><p>Crispy fried patty with special crunchy coating and cheese</p></div><div class="item-price">$8.50</div><button class="add-btn" onclick="addToCart(2, 'Crunch Burger', 8.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>BEEF BURGER</h4><p>Premium beef patty with sesame bun and fresh vegetables</p></div><div class="item-price">$9.50</div><button class="add-btn" onclick="addToCart(3, 'Beef Burger', 9.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>DELUXE BURGER</h4><p>Premium burger with cheese, bacon, lettuce and special sauce</p></div><div class="item-price">$12.00</div><button class="add-btn" onclick="addToCart(4, 'Deluxe Burger', 12.00)">+</button></div>
+                        </div>
+                    </div>
+                    <!-- Shakes -->
+                    <div class="menu-category">
+                        <h3 class="category-title"><span class="category-icon shake-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 22H17L19 8H5L7 22ZM9 10L10 20H14L15 10H9ZM12 2C10.34 2 9 3.34 9 5V6H15V5C15 3.34 13.66 2 12 2Z"/></svg></span>SHAKES & DRINKS</h3>
+                        <div class="menu-items">
+                            <div class="menu-item"><div class="item-info"><h4>CLASSIC SHAKE</h4><p>Creamy vanilla milkshake blend</p></div><div class="item-price">$4.50</div><button class="add-btn" onclick="addToCart(5, 'Classic Shake', 4.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>BERRY SHAKE</h4><p>Mixed berry and cream shake</p></div><div class="item-price">$4.50</div><button class="add-btn" onclick="addToCart(6, 'Berry Shake', 4.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>DASH COFFEE</h4><p>Espresso with steamed milk</p></div><div class="item-price">$2.50</div><button class="add-btn" onclick="addToCart(7, 'Dash Coffee', 2.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>COCONUT TEA</h4><p>Refreshing coconut iced tea</p></div><div class="item-price">$3.50</div><button class="add-btn" onclick="addToCart(8, 'Coconut Tea', 3.50)">+</button></div>
+                        </div>
+                    </div>
+                    <!-- Sides -->
+                    <div class="menu-category">
+                        <h3 class="category-title"><span class="category-icon sides-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 18L5 18L3 8H21L19 18H17M7 18L8 12H16L17 18M7 18H17M12 8V4M9 4H15"/></svg></span>SIDES</h3>
+                        <div class="menu-items">
+                            <div class="menu-item"><div class="item-info"><h4>CAKE BITES</h4><p>Mini cake pastries</p></div><div class="item-price">$3.50</div><button class="add-btn" onclick="addToCart(9, 'Cake Bites', 3.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>CHEESY CUP</h4><p>Melted cheese dip cup</p></div><div class="item-price">$3.50</div><button class="add-btn" onclick="addToCart(10, 'Cheesy Cup', 3.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>CHICKEN STRIPS</h4><p>Crispy chicken tenders</p></div><div class="item-price">$2.50</div><button class="add-btn" onclick="addToCart(11, 'Chicken Strips', 2.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>CHEESY SOUP</h4><p>Creamy cheese soup</p></div><div class="item-price">$3.50</div><button class="add-btn" onclick="addToCart(12, 'Cheesy Soup', 3.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>CRISPY SALADS</h4><p>Fresh garden salad</p></div><div class="item-price">$3.50</div><button class="add-btn" onclick="addToCart(13, 'Crispy Salads', 3.50)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>EGG SHAKES</h4><p>Protein-rich egg shake</p></div><div class="item-price">$5.00</div><button class="add-btn" onclick="addToCart(14, 'Egg Shakes', 5.00)">+</button></div>
+                        </div>
+                    </div>
+                    <!-- Desserts -->
+                    <div class="menu-category">
+                        <h3 class="category-title"><span class="category-icon dessert-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C17.523 2 22 6.477 22 12H2C2 6.477 6.477 2 12 2ZM4 14H20V16C20 18.21 18.21 20 16 20H8C5.79 20 4 18.21 4 16V14Z"/></svg></span>DESSERTS</h3>
+                        <div class="menu-items">
+                            <div class="menu-item"><div class="item-info"><h4>FRUIT & ICE</h4><p>Fresh fruits with ice cream</p></div><div class="item-price">$7.95</div><button class="add-btn" onclick="addToCart(15, 'Fruit & Ice', 7.95)">+</button></div>
+                            <div class="menu-item"><div class="item-info"><h4>MANGO SUNDAE</h4><p>Mango ice cream sundae</p></div><div class="item-price">$6.95</div><button class="add-btn" onclick="addToCart(16, 'Mango Sundae', 6.95)">+</button></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column: Sidebar -->
+        <aside class="sidebar">
+            <!-- Chat Preview -->
+            <div class="chat-card">
+                <h3 class="chat-title">CHAT PREVIEW<span class="chat-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg></span></h3>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message ai-message">
+                        <div class="message-avatar"><div class="human-mini"><div class="human-mini-head"></div><div class="human-mini-body"></div></div></div>
+                        <div class="message-content"><span class="message-sender">Rachel</span><p>Hi! I'm Rachel. Tell me what you'd like to order!</p></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Order Tray -->
+            <div class="tray-card">
+                <h3 class="tray-title"><span class="tray-icon">+</span>YOUR TRAY<span class="tray-icon">+</span></h3>
+                <div class="tray-items" id="trayItems"><p class="empty-tray">Your tray is empty</p></div>
+                <div class="tray-total"><span>TOTAL</span><span id="totalPrice">$0.00</span></div>
+                <button class="checkout-btn" id="checkoutBtn" onclick="goToCheckout()" disabled>CHECKOUT</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Voice Input Bar -->
+    <div class="voice-bar">
+        <div class="human-avatar">
+            <div class="human-body">
+                <div class="human-head">
+                    <div class="human-hair"></div>
+                    <div class="human-face">
+                        <div class="human-eyes"><span class="human-eye"></span><span class="human-eye"></span></div>
+                        <div class="human-smile"></div>
+                    </div>
+                </div>
+                <div class="human-torso"><div class="human-apron"></div></div>
+            </div>
+        </div>
+        <div class="voice-input-container">
+            <button class="voice-connect-btn" id="voiceConnectBtn" onclick="toggleVoiceAI()" title="Connect Voice AI">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+            </button>
+            <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Speak">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+            </button>
+            <input type="text" class="voice-input" id="voiceInput" placeholder="Type your order or tap mic to speak..." onkeypress="handleVoiceInputEnter(event)">
+            <button class="send-btn" onclick="sendVoiceMessage()">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Checkered Floor -->
+    <div class="checkered-floor"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

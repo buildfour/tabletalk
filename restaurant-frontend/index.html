@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TableTalk AI - Restaurant Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="restaurant-page">
+    <!-- Auth Screen -->
+    <div class="auth-screen" id="authScreen">
+        <!-- Mode Switcher - Only on auth screen -->
+        <div class="mode-switcher">
+            <a href="/customer/" class="mode-btn">Customer</a>
+            <a href="index.html" class="mode-btn active">Restaurant Staff</a>
+        </div>
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-small">
+                    <svg viewBox="0 0 40 40" class="logo-svg-small">
+                        <circle cx="20" cy="20" r="18" fill="#f5a623"/>
+                        <circle cx="20" cy="20" r="13" fill="#FDF6E3" stroke="#4ECDC4" stroke-width="1.5"/>
+                        <path d="M13 12 L13 28 M11.5 12 L14.5 12 M11.5 16 L14.5 16" stroke="#4ECDC4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                        <path d="M27 12 L27 18 Q27 21 24 21 L24 28 M27 12 L30 12 L30 18 Q30 21 27 21" stroke="#4ECDC4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                        <ellipse cx="20" cy="23" rx="4" ry="2" fill="#f5a623"/>
+                    </svg>
+                </div>
+                <h2>Staff Login</h2>
+                <p>Enter your staff access code to continue</p>
+            </div>
+            <form class="auth-form" id="staffAuthForm">
+                <div class="form-group">
+                    <label for="staffCode">Staff Access Code</label>
+                    <input type="password" id="staffCode" placeholder="Enter staff code" autocomplete="off" required>
+                </div>
+                <button type="submit" class="btn-primary">Access Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard (hidden until auth) -->
+    <div class="dashboard-wrapper" id="dashboardWrapper" style="display: none;">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <div class="logo-small">
+                    <svg viewBox="0 0 40 40" class="logo-svg-small">
+                        <circle cx="20" cy="20" r="18" fill="#f5a623"/>
+                        <circle cx="20" cy="20" r="13" fill="#FDF6E3" stroke="#4ECDC4" stroke-width="1.5"/>
+                        <path d="M13 12 L13 28 M11.5 12 L14.5 12 M11.5 16 L14.5 16" stroke="#4ECDC4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                        <path d="M27 12 L27 18 Q27 21 24 21 L24 28 M27 12 L30 12 L30 18 Q30 21 27 21" stroke="#4ECDC4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                        <ellipse cx="20" cy="23" rx="4" ry="2" fill="#f5a623"/>
+                    </svg>
+                </div>
+                <h1 class="header-logo-text">TABLETALK AI - RESTAURANT</h1>
+                <span class="header-sparkle">+</span>
+            </div>
+            <div class="header-right">
+                <div class="stats-badge">
+                    <span class="stats-number" id="activeOrders">0</span>
+                    <span class="stats-label">Active Orders</span>
+                </div>
+                <a href="/customer/" class="mode-switch-btn">Customer</a>
+                <button class="logout-btn" onclick="staffLogout()">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/></svg>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <div class="dashboard-container">
+                <!-- Filter Tabs -->
+                <div class="filter-tabs">
+                    <button class="tab-btn active" data-filter="all" onclick="filterOrders('all')">All</button>
+                    <button class="tab-btn" data-filter="received" onclick="filterOrders('received')">New</button>
+                    <button class="tab-btn" data-filter="queued" onclick="filterOrders('queued')">Queued</button>
+                    <button class="tab-btn" data-filter="preparing" onclick="filterOrders('preparing')">Preparing</button>
+                    <button class="tab-btn" data-filter="ready" onclick="filterOrders('ready')">Ready</button>
+                    <button class="tab-btn" data-filter="completed" onclick="filterOrders('completed')">Completed</button>
+                </div>
+
+                <!-- Orders Grid -->
+                <div class="orders-grid" id="ordersGrid"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modalOrderNumber">Order #0000</h3>
+                <button class="close-btn" onclick="closeModal()">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-section">
+                    <h4>Table Details</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item"><span class="detail-label">Table Number</span><span class="detail-value" id="modalTableNumber">-</span></div>
+                        <div class="detail-item"><span class="detail-label">Order Time</span><span class="detail-value" id="modalOrderTime">-</span></div>
+                        <div class="detail-item"><span class="detail-label">Customer Name</span><span class="detail-value" id="modalCustomerName">-</span></div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4>Order Items</h4>
+                    <div class="modal-items" id="modalItems"></div>
+                    <div class="modal-total"><span>Total:</span><span id="modalTotal">$0.00</span></div>
+                </div>
+                <div class="detail-section">
+                    <h4>Order Status</h4>
+                    <div class="status-selector">
+                        <button class="status-btn" data-status="received" onclick="updateStatus('received')"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"/></svg><span>Order Received</span></button>
+                        <button class="status-btn" data-status="queued" onclick="updateStatus('queued')"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg><span>In Queue</span></button>
+                        <button class="status-btn" data-status="preparing" onclick="updateStatus('preparing')"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg><span>Being Prepared</span></button>
+                        <button class="status-btn" data-status="ready" onclick="updateStatus('ready')"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span>Ready for Pickup</span></button>
+                        <button class="status-btn" data-status="completed" onclick="updateStatus('completed')"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span>Completed</span></button>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4>Queue Management</h4>
+                    <div class="queue-grid">
+                        <div class="form-group"><label for="queueNumber">Queue Number</label><input type="number" id="queueNumber" placeholder="Enter queue #" min="1"></div>
+                        <div class="form-group"><label for="waitTime">Estimated Wait Time (minutes)</label><input type="number" id="waitTime" placeholder="Enter minutes" min="1"></div>
+                    </div>
+                    <button class="btn-update" onclick="updateQueueInfo()">Update Queue Info</button>
+                </div>
+                <div class="detail-section">
+                    <h4>Customer Notification</h4>
+                    <div class="form-group">
+                        <label for="notificationMessage">Message (2-3 sentences max)</label>
+                        <textarea id="notificationMessage" rows="3" maxlength="200" placeholder="Send a brief update to the customer..."></textarea>
+                        <div class="char-count"><span id="charCount">0</span>/200 characters</div>
+                    </div>
+                    <button class="btn-notify" onclick="sendNotification()">
+                        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/></svg>
+                        Send Notification
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkered-floor"></div>
+    <div class="checkered-floor"></div>
+    <script src="app.js"></script>
+</body>
+</html>
